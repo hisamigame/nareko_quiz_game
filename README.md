@@ -1,0 +1,1 @@
+# Funny Touhou Quiz
