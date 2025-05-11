@@ -1,1 +1,1 @@
-# nareko_quiz_game
+# Funny Touhou Quiz
