@@ -12,7 +12,7 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
-define config.name = _("NAREKO QUIZ GAME")
+define config.name = _("Might as well stake your life to take Nareko's Lunatic Touhou quiz")
 
 
 ## Determines if the title given above is shown on the main menu screen. Set

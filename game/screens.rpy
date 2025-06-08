@@ -1609,3 +1609,12 @@ style slider_vbox:
 style slider_slider:
     variant "small"
     xsize 900
+
+
+screen stats_screen():
+    frame:
+        xalign 1.0
+        yalign 0.0
+        vbox:
+            text "[correct] / [total]"
+            
