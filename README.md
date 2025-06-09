@@ -32,4 +32,7 @@ https://wiki.maribelhearn.com/wiki/Touhou_1:_Highly_Responsive_to_Prayers/Advanc
 
 - Touhou 2 Skill Point titles:
   https://wiki.maribelhearn.com/wiki/Touhou_2:_Story_of_Eastern_Wonderland/Advanced_Mechanics
-  
+
+
+- Unlock codes:
+  https://en.touhouwiki.net/wiki/List_of_Unlock_Codes

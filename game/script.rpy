@@ -20,13 +20,14 @@ define n = Character("Nareko", color="b3702f")
 image nareko = im.Scale("nareko_neutral.png",474,900)
 image nareko happy = im.Scale("nareko_happy.png",474,900)
 image nareko shocked = im.Scale("nareko_shocked.png",474,900)
+image nareko angry = im.Scale("nareko_shocked.png",474,900)
+
 image reimu = im.Scale("reimu_image.png", 703, 1000)
 
 define config.font_name_map["jp"] = "NotoSansJP-Regular.ttf"
 
 # The game starts here.
 label start:
-    
     show screen stats_screen
     #window show dissolve
     play music "<loop 02.749 to 112.632>MightAsWellRiskItOnMusicFor500.ogg"
@@ -39,6 +40,8 @@ label start:
     $ edgydone = False
     $ bombdone = False
     $ deathbomb_correct = 0
+    $ namelist = []
+    
     
     # Show a background. This uses a placeholder by default, but you can
     # add a file (named either "bg room.png" or "bg room.jpg") to the
@@ -324,7 +327,8 @@ label start:
             jump deathbomb2
         label deathbomb1_3:
             $ correct = correct + 1
-            n "Correct! With each frame being 1/60 seconds, it gives you about 0.133 seconds to deathbomb, which is faster than pretty much any mere human can react."
+            $ deathbomb_correct = deathbomb_correct + 1
+            n "Correct! With each frame being 1/60 seconds, it gives you about 0.133 seconds to deathbomb, which is too short for mere humans to react to."
             jump deathbomb2
         label deathbomb1_4:
             n "Wrong! {i}Obviously,{/i} it's 8 frames, or about 0.133 seconds." with vpunch
@@ -358,6 +362,7 @@ label start:
             jump deathbomb3
         label deathbomb2_4:
             $ correct = correct + 1
+            $ deathbomb_correct = deathbomb_correct + 1
             n "Correct! The window starts at 6 frames, but is reduced every time you deathbomb."
             n "Specifically, the window is reduced by the difference between when you took a hit and when you bombed. It resets to being 6 frames every time you die, though."
             jump deathbomb3
@@ -390,6 +395,7 @@ label start:
             jump branch2
         label deathbomb3_4:
             $ correct = correct + 1
+            $ deathbomb_correct = deathbomb_correct + 1
             n 'Correct! In Touhou 8, normal spells like "Master Spark" have a 1 frame deathbomb window. Of course, {i}Last Spells{/i} like "Final Spark" have a very large window, but they cost 2 bombs.'
             jump branch2
 
@@ -405,7 +411,7 @@ label start:
         n '{b}Simply pick the option that says "Mountain of Faith".{/b}'
         menu:
             extend ""
-            "{font=jp}お風呂{/font}":
+            "{font=jp}風呂{/font}":
                 jump fuujinroku_1
             "{font=jp}風神録{/font}":
                 jump fuujinroku_2
@@ -455,10 +461,10 @@ label start:
             jump newchars
         label yamawaro_3:
             $ correct = correct + 1
-            "Correct! Who could forget about chapter 13 of {i}Wild and Horned Hermit{/i}."
+            "Correct! Who could forget about chapter 13 of {i}Wild and Horned Hermit{/i}?"
             jump newchars
         label yamawaro_4:
-            "Wrong! While the first named yamawaro character (Yamashiro Takane) was indeed introduced in 2021, the yamawaro themselves were introduced in chapter 13 of {i}Wild and Horned Hermit{/i}, in 2012." with vpunch
+            "Wrong! The first named yamawaro character (Yamashiro Takane) was indeed introduced in 2021, but the yamawaro themselves were introduced in chapter 13 of {i}Wild and Horned Hermit{/i}, in 2012." with vpunch
             jump newchars
             
 
@@ -551,10 +557,10 @@ label start:
             "CAVE":
                 jump taito1_4
         label taito1_1:
-            n "Wrong! While Konami fits the description, it's not where ZUN worked. He worked at Taito."
+            n "Wrong! While Konami fits the description, it's not where ZUN worked. He worked at Taito." with vpunch
             jump taito2
         label taito1_2:
-            n "Wrong! While Namco fits the description, it's not where ZUN worked. He worked at Taito."
+            n "Wrong! While Namco fits the description, it's not where ZUN worked. He worked at Taito."  with vpunch
             jump taito2
         label taito1_3:
             $ correct = correct + 1
@@ -563,7 +569,7 @@ label start:
             n "About a decade later, Taito would go on to publish Touhou Spell Bubble."
             jump taito2
         label taito1_4:
-            n "Wrong!  ZUN worked at Taito, not CAVE."
+            n "Wrong!  ZUN worked at Taito, not CAVE."  with vpunch
             jump taito2
             
     label taito2:
@@ -585,56 +591,326 @@ label start:
         label taito2_1:
             $ correct = correct + 1
             n "Correct! The first game in the {i}Kiki Kaikai{/i} series was developed by Taito, while they outsourced later games in the series to Natsume. Natsume brought the series to home consoles and got it localized in the west as {i}Pocky & Rocky{/i}."
-            jump tonext
+            jump alice
         label taito2_2:
             n "Wrong! Touhou 2 contains a reference to this game, but it's not a shooting game with shrine maidens, nor developed by Taito. It's a puzzle game by Konami." with vpunch
-            jump tonext
+            jump alice
         label taito2_3:
-            n "Wrong! While Touhou 1 clearly draws some inspiration from Megami Tensei, it's not a shooting game with shrine maidens, nor developed by Taito. It's a series of roleplaying games by Atlus." with vpunhc
-            jump tonext
+            n "Wrong! While Touhou 1 clearly draws some inspiration from Megami Tensei, it's not a shooting game with shrine maidens, nor developed by Taito. It's a series of roleplaying games by Atlus." with vpunch
+            jump alice
         label taito2_4:
             n "Wrong! While ZUN has traced art from the Rance series, it's not a shooting game with shrine maidens, nor developed by Taito. It's a series of erotic RPG games by AliceSoft." with vpunch
-            jump tonext
+            n "Speaking of Alice..."
+            jump alice
 
-            
 
-    label tonext:
-        # TODO: put more stuff here tomorrow.
-        # TODO maybe Alice questions?
-        "TODO MORE HERE"
-        jump ending
-            
-    label nododge:
-        n "In the Omake.txt of EoSD, ZUN talks about the tendency of modern game developers to add gimmicks to their STGs that remove or deemphasize the need to dodge bullets."
-        n "Which is the first Touhou game that can be beaten without dodging anything?"
+
+    label alice:
+        n 'Given that ZUN\'s doujin circle is called "Team Shanghai Alice", you\'d assume that Alice Margatroid is a very important character.'
+        $ total = total + 1
+        window hide
+        window show
+        n '{b}In which game did Alice Margatroid first appear?{/b}'
         menu:
-            "Touhou 1":
-                jump a_nododge_1
-            "Touhou 6":
-                jump a_nododge_2
-            "Touhou 9":
-                jump a_nododge_3
-            "Touhou 16":
-                jump a_nododge_4
-                
-        label a_nododge_1:
-            "Correct!"
+            extend ""
+            "Story of Eastern Wonderland":
+                jump alice_1
+            "Mystic Square":
+                jump alice_2
+            "Immaterial and Missing Power":
+                jump alice_3
+            "Perfect Cherry Blossom":
+                jump alice_4
+           
+        label alice_1:
+            n "Wrong! The {i}Wonderland{/i} in the title brings {i}Alice in Wonderland{/i} to mind, but Alice doesn't make her debut until Mystic Square." with vpunch
+            jump western
+        label alice_2:
             $ correct = correct + 1
-            jump random_question
-        label a_nododge_2:
-            "No!"
-            jump random_question
-        label a_nododge_3:
-            "Incorrect!"
-            jump random_question
-        label a_nododge_4:
-            "Also incorrect!!"
-            jump random_question
+            n "Correct! Alice is the Extra boss of Mysic Square."
+            jump western
+        label alice_3:
+            n "Wrong! While Alice is playable in Touhou 7.5, she made her debut all the way back in Mystic Square."  with vpunch
+            jump western
+        label alice_4:
+            n "Wrong! While Alice appears as the stage 3 boss in Perfect Cherry Blossom, she made her debut all the way back in Mystic Square."  with vpunch
+            jump western
+
+    label western:
+        n 'The "Shanghai" in "Team Shanghai Alice" is meant to invoke the image of a city where East meets West. The earlier official games typically feature Eastern and Western characters.'
+        $ total = total + 1
+        window hide
+        window show
+        n "{b}Which was the latest official game to introduce a new character with a non-Japanese name?{/b}"
+        menu:
+            extend ""
+            "Touhou 15":
+                jump western_1
+            "Touhou 16":
+                jump western_2
+            "Touhou 17":
+                jump western_3
+            "Touhou 18":
+                jump western_4
+        label western_1:
+            n "Wrong! {i}Doremy Sweet{/i} and {i}Hecatia Lapislazuli{/i} may be Western names, but Eternity Larva was introduced in Touhou 16 and definitely has a non-Japanese name." with vpunch
+            n "Is it a Western name? Try to name your kids after her and find out..." 
+            jump nue
+        label western_2:
+            $ correct = correct + 1
+            n "Correct! {i}Eternity Larva{/i} is definitely not a Japanese name. Is it a Western name? Try to name your kids after her and find out..."
+            jump nue
+        label western_3:
+            n "Wrong! It's all Japanese names in Touhou 17." with vpunch
+            jump nue
+        label western_4:
+            n "Wrong! It's all Japanese names in Touhou 18." with vpunch
+            jump nue
+            
+    label nue:
+        n "Have you played the latest Touhou game yet?"
+        n "It's my game, so you better play it! There is a demo on Steam."
+        extend "\nThe next question will surely give you trouble if you haven't..."
+        $ total = total + 1
+        window hide
+        window show
+        n "One of the new characters in the Touhou 20 demo shares her family name with a character from the older games."
+        n "{b}Which older character has the same family name as a Touhou 20 character?{/b}"
+        menu:
+            extend ""
+            "Nue":
+                jump nue_1
+            "Mamizou":
+                jump nue_2
+            "Raiko":
+                jump nue_3
+            "Hecatia":
+                jump nue_4
+        label nue_1:
+            $ correct = correct + 1
+            n "Correct! Houjuu Nue from Touhou 12 has the same family name Houjuu ({font=jp}封獣{/font}) as Houjuu Chimi, the stage 2 boss of Touhou 20."
+            jump kirin
+        label nue_2:
+            n "Wrong! Houjuu Nue from Touhou 12 has the same family name Houjuu ({font=jp}封獣{/font}) as Houjuu Chimi, the stage 2 boss of Touhou 20." with vpunch
+            jump kirin
+        label nue_3:
+            n "Wrong! Houjuu Nue from Touhou 12 has the same family name Houjuu ({font=jp}封獣{/font}) as Houjuu Chimi, the stage 2 boss of Touhou 20." with vpunch
+            jump kirin
+        label nue_4:
+            n "Lapislazuli? Touhou 20 may have many gemstones, but it's still the wrong answer."  with vpunch
+            n "Houjuu Nue from Touhou 12 has the same family name Houjuu ({font=jp}封獣{/font}) as Houjuu Chimi, the stage 2 boss of Touhou 20."
+            jump kirin
+
+    label kirin:
+        n "For the next question, pick the option that matches the following description."
+        $ total = total + 1
+        window hide
+        window show
+        n "{b}Beer brand ZUN is known to favor, which is also part of the Unlock code for TH19.{/b}"
+        menu:
+            extend ""
+            "Yebisu":
+                jump kirin_1
+            "Orion":
+                jump kirin_2
+            "Kirin":
+                jump kirin_3
+            "Sapporo":
+                jump kirin_4
+        label kirin_1:
+            n "Wrong! Yebisu is part of the unlock code for 'Great Fairy Wars'"  with vpunch
+            n "Unlock codes are codes that let you unlock everything (Extra stages, etc) in the official Touhou games. They are typically input by typing on your keyboard while having a specific item selected in one of the menus."
+            n "The details vary between the games and are very obscure. Unlock codes exists for almost all official Windows games, but the existence of these codes only became known to the public in 2019."
+            jump impossible
+        label kirin_2:
+            n "Wrong! Orion is part of the unlock code for 'Double Dealing Character'" with vpunch
+            n "Unlock codes are codes that let you unlock everything (Extra stages, etc) in the official Touhou games. They are typically input by typing on your keyboard while having a specific item selected in one of the menus."
+            n "The details vary between the games and are very obscure. Unlock codes exists for almost all official Windows games, but the existence of these codes only became known to the public in 2019."
+            jump impossible
+        label kirin_3:
+            $ correct = correct + 1
+            n "Correct! The unlock code for Touhou 19 is 'kirinlager'. Additionally, when ZUN was asked about his favorite beer brand during a panel at Anime Weekend Atlanta in 2013, the answer was 'Kirin'."
+            #n "Unlock codes are codes that let you unlock everything (Extra stages, etc) in the official Touhou games. They are typically input by typing on your keyboard while having a specific item selected in one of the menus."
+            #n "The details vary between the games and are very obscure. Unlock codes exists for almost all official Windows games, but the existence of these codes only became known to the public in 2019."
+            jump impossible
+        label kirin_4:
+            #No current unlock codes meantion sapporo.
+            n "Wrong! The unlock code for Touhou 19 is 'kirinlager'."  with vpunch 
+            n "Unlock codes are codes that let you unlock everything (Extra stages, etc) in the official Touhou games. They are typically input by typing on your keyboard while having a specific item selected in one of the menus."
+            n "The details vary between the games and are very obscure. Unlock codes exists for almost all official Windows games, but the existence of these codes only became known to the public in 2019."
+            jump impossible
+                
+
+    label impossible:
+        $ total = total + 1
+        window hide
+        window show
+        n '{b}Which is the first official Touhou game to not feature "Touhou" in the title?{/b}'
+        menu:
+            extend ""
+            "Hisoutensoku":
+                jump impossible_1
+            "Violet Detector":
+                jump impossible_2
+            "Impossible Spell Card":
+                jump impossible_3
+            "Shoot the Bullet":
+                jump impossible_4
+        label impossible_1:
+            n 'Wrong! The full title is "Touhou Hisoutensoku ~ Choudokyuu Ginyoru no Nazo o Oe". It is notable for being the only title in the series without an English component, but it has "Touhou" in it.' with vpunch
+            jump penult
+        label impossible_2:
+            n 'Wrong! "Danmaku Amanojaku ~ Impossible Spell Card" released before "Hifuu Nightmare Diary ~ Violet Detector"!!' with vpunch
+            jump penult
+        label impossible_3:
+            $ correct = correct + 1
+            n 'Correct! The full title is "Danmaku Amanojaku ~ Impossible Spell Card". Since then, most spin-off games have dropped "Touhou" from the title.'
+            jump penult
+        label impossible_4:
+            n 'Wrong! The full title is "Touhou Bunkachou ~ Shoot the Bullet".' with vpunch
+            jump penult
+
+
+    label penult:
+        n "Now, time for the final question. Question number 20!"
+        $ total = total + 1
+        window hide
+        window show
+        n "{b}The way waves of fairies spawn in Touhou 9 is affected by...{/b}"
+        menu:
+            extend ""
+            "The player's position":
+                jump penult_1
+            "The player's remaining health":
+                jump penult_2
+            "Using focus (the scope)":
+                jump penult_3
+            "Which side the player is on":
+                jump penult_4
+            "All of the above":
+                jump penult_5
+
+        label penult_1:
+            n "Wrong! Touhou 9 will famously spawn fairies right next to the player, although this typically only happen if the player gets unlucky while in the lower left or right corners of the screen." with vpunch
+            n "Deploying the scope causes less fairies to spawn by slowing down the timer that determines when waves spawn."
+            n "When playing Touhou 9 competitvely, it is often beneficial to have many fairies on screen, as it makes it easier to get larger combos to get spell score and clear more bullets."
+            jump final
+        label penult_2:
+            n "Wrong! The fairies spawn in the same way regardless of how much health the player has left." with vpunch
+            n "Deploying the scope causes less fairies to spawn by slowing down the timer that determines when waves spawn."
+            n "When playing Touhou 9 competitvely, it is often beneficial to have many fairies on screen, as it makes it easier to get larger combos to get spell score and clear more bullets."
+            jump final
+        label penult_3:
+            $ correct = correct + 1
+            n "Correct! Deploying the scope causes less fairies to spawn by slowing down the timer that determines when waves spawn."
+            n "When playing Touhou 9 competitvely, it is often beneficial to have many fairies on screen, as it makes it easier to get larger combos to get spell score and clear more bullets."
+            jump final
+        label penult_4:
+            n 'Wrong! Both sides get exactly the same pattern. The pattern is not mirrored or anything.' with vpunch
+            n "Deploying the scope causes less fairies to spawn by slowing down the timer that determines when waves spawn."
+            n "When playing Touhou 9 competitvely, it is often beneficial to have many fairies on screen, as it makes it easier to get larger combos to get spell score and clear more bullets."
+            jump final
+
+        label penult_5:
+            n 'Wrong! The only thing listed here that affects how the fairies spawn is "using focus".' with vpunch
+            n "Deploying the scope causes less fairies to spawn by slowing down the timer that determines when waves spawn."
+            n "When playing Touhou 9 competitvely, it is often beneficial to have many fairies on screen, as it makes it easier to get larger combos to get spell score and clear more bullets."
+            jump final
+
+
+    label final:
+        if correct < 20:
+            n "Since you didn't get all the questions right, I'm afraid I can't let you live."
+            n "However, I'm willing to let you keep your life if you correctly answer a bonus question."
+            window hide
+            window show
+            $ best2hu = renpy.input("{b}Who is objectively the best Touhou character?{/b}", length=64)
+            python:
+                best2hu = best2hu.strip().lower()
+                # replace some special characters
+                namelist = best2hu.replace('-',' ').replace('.','').replace(',','').split()
+                # remove titles,honorifics etc, if someone is subversive enough to input "Lady Michigami-sama"
+                # they won't fool the game.
+                def remove_if_exists(s):
+                    if s in namelist:
+                        namelist.remove(s)
+                remove_if_exists('san')
+                remove_if_exists('sama')
+                remove_if_exists('lord')
+                remove_if_exists('master')
+                remove_if_exists('lady')
+                remove_if_exists('frau')
+                remove_if_exists('miss')
+                remove_if_exists('ms')
+                remove_if_exists('tama')
+                remove_if_exists('chama')
+                remove_if_exists('chan')
+                remove_if_exists('tan')
+            
+            $ final_correct = False # default to incorrect
+            if len(namelist) == 1:
+                if namelist[0] == 'michigami' or namelist[0] == 'nareko' or namelist[0] == 'you':
+                    $ final_correct = True
+            elif len(namelist) > 1:
+                if ('michigami' in namelist) or ('nareko' in namelist):
+                    $ final_correct = True
+            if final_correct:
+                show nareko happy
+                n 'Yes!'
+                n "You really understand quizes! ❤"
+                show nareko
+                n "Now, be on your way. And tell all your human friends about my awesome quiz."
+                jump ending
+            else:
+                show nareko angry
+                n "{b}It's me, you fool! I am the best Touhou character!{/b}"
+                if deathbomb_correct >= 2:
+                    hide nareko with dissolve
+                    "Using your detailed knowledge about deathbomb frame data, you somehow managed to avoid dying."
+                else:
+                    hide nareko with dissolve
+                    "You ran away. Despite her threating attitude, Nareko doesn't seem that eager to chase you, nor aim bullets at you."
+                jump ending
+        else:
+            n "Wow, you got all my questions right. I didn't expect that."
+            show nareko happy
+            n "You are a true Touhou quiz master!"
+            show nareko
+            n "Now, be on your way. And tell all your human friends about my awesome quiz."
+            jump ending
+            
+    # label nododge:
+    #     n "In the Omake.txt of EoSD, ZUN talks about the tendency of modern game developers to add gimmicks to their STGs that remove or deemphasize the need to dodge bullets."
+    #     n "Which is the first Touhou game that can be beaten without dodging anything?"
+    #     menu:
+    #         "Touhou 1":
+    #             jump a_nododge_1
+    #         "Touhou 6":
+    #             jump a_nododge_2
+    #         "Touhou 9":
+    #             jump a_nododge_3
+    #         "Touhou 16":
+    #             jump a_nododge_4
+                
+    #     label a_nododge_1:
+    #         "Correct!"
+    #         $ correct = correct + 1
+    #         jump random_question
+    #     label a_nododge_2:
+    #         "No!"
+    #         jump random_question
+    #     label a_nododge_3:
+    #         "Incorrect!"
+    #         jump random_question
+    #     label a_nododge_4:
+    #         "Also incorrect!!"
+    #         jump random_question
 
             
     label ending:
-        n "You finished the quiz!"
-        n "Correct answers [correct] out of [total]"
+        hide nareko with dissolve
+        "You finished the quiz!"
+        "Correct answers: [correct] out of [total]"
         jump end_game
         
     label end_game:
