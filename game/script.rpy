@@ -3,6 +3,12 @@
 # Declare characters used by this game. The color argument colorizes the
 # name of the character.
 
+init python:
+    def remove_if_exists(s, namelist):
+        if s in namelist:
+            namelist.remove(s)
+                
+
 style ruby_style is default:
     size 16
     yoffset -28
@@ -111,7 +117,7 @@ label start:
         $ total = total + 1
         window hide
         window show
-        n "{b}Which is the 10th Touhou game?{/b}"
+        n "{b}Which is the 10th official Touhou game?{/b}"
         menu:
             extend ""
             "Touhou 9":
@@ -129,7 +135,7 @@ label start:
             $ last_wrong = False
             jump eosdeasy
         label a_touhou9_2:
-            "Wrong! Both Touhou 7.5 and 9.5 released before Mountain of Faith, making it the twelth game in the series."  with vpunch
+            "Wrong! Both Touhou 7.5 and 9.5 released before Mountain of Faith, making it the twelfth game in the series."  with vpunch
             $ last_wrong = True
             jump  eosdeasy
         label a_touhou9_3:
@@ -422,7 +428,7 @@ label start:
 
         label fuujinroku_1:
             n "Wrong!!!" with vpunch
-            n "Maybe you should learn to read, instead of taking dubious quizes from even more dubious {rb}sphinxes{/rb}{rt}(dousojin){/rt}?"
+            n "Maybe you should learn to read, instead of taking dubious quizzes from even more dubious {rb}sphinxes{/rb}{rt}(dousojin){/rt}?"
             jump yamawaro
         label fuujinroku_2:
             $ correct = correct + 1
@@ -430,11 +436,11 @@ label start:
             jump yamawaro
         label fuujinroku_3:
             n "Wrong!!!"
-            n "Maybe you should learn to read, instead of taking dubious quizes from even more dubious sphinxes?"
+            n "Maybe you should learn to read, instead of taking dubious quizzes from even more dubious sphinxes?"
             jump yamawaro
         label fuujinroku_4:
             n "Wrong!!!"
-            n "Maybe you should learn to read, instead of taking dubious quizes from even more dubious sphinxes?"
+            n "Maybe you should learn to read, instead of taking dubious quizzes from even more dubious sphinxes?"
             jump yamawaro
 
     label yamawaro:
@@ -515,7 +521,7 @@ label start:
                 jump depiction_1
             "Jesus Christ":
                 jump depiction_2
-            "Chang'e":
+            "The Hakurei God":
                 jump depiction_3
             "Gungnir":
                 jump depiction_4
@@ -532,7 +538,7 @@ label start:
             
         label depiction_3:
             $ correct = correct + 1
-            n "That's right! Despite being mentioned several times, Chang'e has never been official depicted."
+            n "That's right! Despite being mentioned a, The Hakurei god has never been official depicted."
             jump taito1
             
         label depiction_4:
@@ -596,7 +602,7 @@ label start:
             n "Wrong! Touhou 2 contains a reference to this game, but it's not a shooting game with shrine maidens, nor developed by Taito. It's a puzzle game by Konami." with vpunch
             jump alice
         label taito2_3:
-            n "Wrong! While Touhou 1 clearly draws some inspiration from Megami Tensei, it's not a shooting game with shrine maidens, nor developed by Taito. It's a series of roleplaying games by Atlus." with vpunch
+            n "Wrong! While Touhou 1 clearly draws some inspiration from Megami Tensei, it's not a shooting game with shrine maidens, nor developed by Taito. It's a series of role-playing games by Atlus." with vpunch
             jump alice
         label taito2_4:
             n "Wrong! While ZUN has traced art from the Rance series, it's not a shooting game with shrine maidens, nor developed by Taito. It's a series of erotic RPG games by AliceSoft." with vpunch
@@ -610,7 +616,7 @@ label start:
         $ total = total + 1
         window hide
         window show
-        n '{b}In which game did Alice Margatroid first appear?{/b}'
+        n '{b}In which game did Alice first appear?{/b}'
         menu:
             extend ""
             "Story of Eastern Wonderland":
@@ -627,7 +633,7 @@ label start:
             jump western
         label alice_2:
             $ correct = correct + 1
-            n "Correct! Alice is the Extra boss of Mysic Square."
+            n "Correct! Alice is the Extra boss of Mystic Square."
             jump western
         label alice_3:
             n "Wrong! While Alice is playable in Touhou 7.5, she made her debut all the way back in Mystic Square."  with vpunch
@@ -689,16 +695,20 @@ label start:
         label nue_1:
             $ correct = correct + 1
             n "Correct! Houjuu Nue from Touhou 12 has the same family name Houjuu ({font=jp}封獣{/font}) as Houjuu Chimi, the stage 2 boss of Touhou 20."
+            n "'Houjuu' means something like 'sealed beast', perhaps a reference to Nue being sealed away prior to the events of UFO?"
             jump kirin
         label nue_2:
             n "Wrong! Houjuu Nue from Touhou 12 has the same family name Houjuu ({font=jp}封獣{/font}) as Houjuu Chimi, the stage 2 boss of Touhou 20." with vpunch
+            n "'Houjuu' means something like 'sealed beast', perhaps a reference to Nue being sealed away prior to the events of UFO?"
             jump kirin
         label nue_3:
             n "Wrong! Houjuu Nue from Touhou 12 has the same family name Houjuu ({font=jp}封獣{/font}) as Houjuu Chimi, the stage 2 boss of Touhou 20." with vpunch
+            n "'Houjuu' means something like 'sealed beast', perhaps a reference to Nue being sealed away prior to the events of UFO?"
             jump kirin
         label nue_4:
             n "Lapislazuli? Touhou 20 may have many gemstones, but it's still the wrong answer."  with vpunch
             n "Houjuu Nue from Touhou 12 has the same family name Houjuu ({font=jp}封獣{/font}) as Houjuu Chimi, the stage 2 boss of Touhou 20."
+            n "'Houjuu' means something like 'sealed beast', perhaps a reference to Nue being sealed away prior to the events of UFO?"
             jump kirin
 
     label kirin:
@@ -793,28 +803,28 @@ label start:
         label penult_1:
             n "Wrong! Touhou 9 will famously spawn fairies right next to the player, although this typically only happen if the player gets unlucky while in the lower left or right corners of the screen." with vpunch
             n "Deploying the scope causes less fairies to spawn by slowing down the timer that determines when waves spawn."
-            n "When playing Touhou 9 competitvely, it is often beneficial to have many fairies on screen, as it makes it easier to get larger combos to get spell score and clear more bullets."
+            n "When playing Touhou 9 competitively, it is often beneficial to have many fairies on screen, as it makes it easier to get larger combos to get spell score and clear more bullets."
             jump final
         label penult_2:
             n "Wrong! The fairies spawn in the same way regardless of how much health the player has left." with vpunch
             n "Deploying the scope causes less fairies to spawn by slowing down the timer that determines when waves spawn."
-            n "When playing Touhou 9 competitvely, it is often beneficial to have many fairies on screen, as it makes it easier to get larger combos to get spell score and clear more bullets."
+            n "When playing Touhou 9 competitively, it is often beneficial to have many fairies on screen, as it makes it easier to get larger combos to get spell score and clear more bullets."
             jump final
         label penult_3:
             $ correct = correct + 1
             n "Correct! Deploying the scope causes less fairies to spawn by slowing down the timer that determines when waves spawn."
-            n "When playing Touhou 9 competitvely, it is often beneficial to have many fairies on screen, as it makes it easier to get larger combos to get spell score and clear more bullets."
+            n "When playing Touhou 9 competitively, it is often beneficial to have many fairies on screen, as it makes it easier to get larger combos to get spell score and clear more bullets."
             jump final
         label penult_4:
             n 'Wrong! Both sides get exactly the same pattern. The pattern is not mirrored or anything.' with vpunch
             n "Deploying the scope causes less fairies to spawn by slowing down the timer that determines when waves spawn."
-            n "When playing Touhou 9 competitvely, it is often beneficial to have many fairies on screen, as it makes it easier to get larger combos to get spell score and clear more bullets."
+            n "When playing Touhou 9 competitively, it is often beneficial to have many fairies on screen, as it makes it easier to get larger combos to get spell score and clear more bullets."
             jump final
 
         label penult_5:
             n 'Wrong! The only thing listed here that affects how the fairies spawn is "using focus".' with vpunch
             n "Deploying the scope causes less fairies to spawn by slowing down the timer that determines when waves spawn."
-            n "When playing Touhou 9 competitvely, it is often beneficial to have many fairies on screen, as it makes it easier to get larger combos to get spell score and clear more bullets."
+            n "When playing Touhou 9 competitively, it is often beneficial to have many fairies on screen, as it makes it easier to get larger combos to get spell score and clear more bullets."
             jump final
 
 
@@ -831,21 +841,18 @@ label start:
                 namelist = best2hu.replace('-',' ').replace('.','').replace(',','').split()
                 # remove titles,honorifics etc, if someone is subversive enough to input "Lady Michigami-sama"
                 # they won't fool the game.
-                def remove_if_exists(s):
-                    if s in namelist:
-                        namelist.remove(s)
-                remove_if_exists('san')
-                remove_if_exists('sama')
-                remove_if_exists('lord')
-                remove_if_exists('master')
-                remove_if_exists('lady')
-                remove_if_exists('frau')
-                remove_if_exists('miss')
-                remove_if_exists('ms')
-                remove_if_exists('tama')
-                remove_if_exists('chama')
-                remove_if_exists('chan')
-                remove_if_exists('tan')
+                remove_if_exists('san',namelist)
+                remove_if_exists('sama',namelist)
+                remove_if_exists('lord',namelist)
+                remove_if_exists('master',namelist)
+                remove_if_exists('lady',namelist)
+                remove_if_exists('frau',namelist)
+                remove_if_exists('miss',namelist)
+                remove_if_exists('ms',namelist)
+                remove_if_exists('tama',namelist)
+                remove_if_exists('chama',namelist)
+                remove_if_exists('chan',namelist)
+                remove_if_exists('tan',namelist)
             
             $ final_correct = False # default to incorrect
             if len(namelist) == 1:
@@ -857,7 +864,7 @@ label start:
             if final_correct:
                 show nareko happy
                 n 'Yes!'
-                n "You really understand quizes! ❤"
+                n "You really understand quizzes! ❤"
                 show nareko
                 n "Now, be on your way. And tell all your human friends about my awesome quiz."
                 jump ending
@@ -869,7 +876,7 @@ label start:
                     "Using your detailed knowledge about deathbomb frame data, you somehow managed to avoid dying."
                 else:
                     hide nareko with dissolve
-                    "You ran away. Despite her threating attitude, Nareko doesn't seem that eager to chase you, nor aim bullets at you."
+                    "You ran away. Despite her threatening attitude, Nareko doesn't seem that eager to chase you, nor aim bullets at you."
                 jump ending
         else:
             n "Wow, you got all my questions right. I didn't expect that."
