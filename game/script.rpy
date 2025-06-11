@@ -122,7 +122,7 @@ label start:
             jump touhou9
         label reimuq_4:
             hide reimu with dissolve
-            n "Wrong. It's Reimu."  with vpunch
+            n "Did you misclick or something? It's Reimu."  with vpunch
             jump touhou9
 
         
@@ -160,14 +160,15 @@ label start:
             $ last_wrong = True
             jump  eosdeasy
         label a_touhou9_3:
-            n "Wrong! In which timeline could that have been the right answer?"
+            n "Wrong! In which timeline could that have been the right answer?"   with vpunch
             show nareko happy
-            n "The 10th game in the Touhou series is {i}of course{/i} Touhou 9. It released on Auguest 14th, 2005 – a whole year after Touhou 7.5!"  with vpunch
+            n "The 10th game in the Touhou series is {i}of course{/i} Touhou 9. It released on Auguest 14th, 2005 – a whole year after Touhou 7.5!"
             show nareko
             $ last_wrong = True
             jump eosdeasy
         label a_touhou9_4:
             n "Wrong! That's not even a Touhou game... are you taking this seriously?" with vpunch
+            n "The 10th game in the Touhou series is {i}of course{/i} Touhou 9. It released on Auguest 14th, 2005 – a whole year after Touhou 7.5!"
             $ last_wrong = True
             jump eosdeasy
 
@@ -195,15 +196,18 @@ label start:
                 jump eosdeasy_4
 
         label eosdeasy_1:
-            n "Wrong! You don't even get to fight Remilia on Easy..." with vpunch
+            n "Wrong! You don't even get to fight Remilia on Easy... The Vampire herself is an illusion?" with vpunch
+            n "Since Sakuya is the last boss on Easy Mode, the answer must clearly be Maid Secret Skill \"Manipulating Doll\"!"
             $ last_wrong = True
             jump yakuza
         label eosdeasy_2:
             n "Wrong! That's one of Flandre's Spell Cards."  with vpunch
+            n "Since Easy Mode only has the first five stages, Sakuya is the final boss and the answer must be Maid Secret Skill \"Manipulating Doll\"!"
             $ last_wrong = True
             jump yakuza
         label eosdeasy_3:
             n "Wrong! That is the final Spell Card on {i}Normal.{/i}"  with vpunch
+            n "Since Easy Mode only has the first five stages, Sakuya is the final boss and the answer must be Maid Secret Skill \"Manipulating Doll\"!"
             $ last_wrong = True
             jump yakuza
         label eosdeasy_4:
@@ -240,15 +244,18 @@ label start:
             jump branch1
         label yakuza_2:
             n "Wrong! Saki, the leader of the wolves, appeared as the Extra boss of Touhou 17."  with vpunch
+            n "The correct answer is \"The Gouyoku Alliance\" since Yuuma didn't appear unti Touhou 17.5."
             $ last_wrong = True
             jump branch1
         label yakuza_3:
             n "Wrong! Yachie, the leader of the otters, appeared as the Stage 4 boss of Touhou 17."  with vpunch
+            n "The correct answer is \"The Gouyoku Alliance\" since Yuuma didn't appear unti Touhou 17.5."
             $ last_wrong = True
             jump branch1
         label yakuza_4:
             $ correct = correct + 1
             n 'Wrong! That\'s not even an animal faction. "Joutouguu" is Mayumi\'s family name.'  with vpunch
+            n "The correct answer is \"The Gouyoku Alliance\" since Yuuma didn't appear unti Touhou 17.5."
             $ last_wrong = True
             jump branch1
 
@@ -335,10 +342,11 @@ label start:
             "Toyohime":
                 jump cilr_4
         label cilr_1:
-            n "Wrong! Chapter 6 is told from Rei'sen's perspective. She's clearly a very important rabbit, so Yorihime's battle is told from her perspective."  with vpunch
+            n "Wrong! Chapter 6 is told from Rei'sen's perspective. She's clearly a very important rabbit, so Yorihime's battle with Marisa is told from her perspective, leaving Yorihime without her own chapter."  with vpunch
             jump branch2
         label cilr_2:
             n "Wrong! Chapter 7 is about Ran's visit to the Netherworld and is told from Youmu's perspective." with vpunch # This line connects well to 'edgyzun2'.
+            n "{i}Watatsuki no Yorihime{/i} is the one without a chapter told from her own perspective."
             jump branch2
         label cilr_3:
             $ correct = correct + 1
@@ -348,6 +356,7 @@ label start:
             jump branch2
         label cilr_4:
             n "Wrong! Chapter 3 is told from Watatsuki no Toyohime's perspective." with  vpunch
+            n "{i}Watatsuki no Yorihime{/i} is the one without a chapter told from her own perspective."
             jump branch2
         
             
@@ -486,12 +495,14 @@ label start:
                 
         label deathbomb2_1:
             n "Wrong! Touhou 6 sits in-between the PC98 and Windows eras, and is therefore unusual in many regards." with vpunch
+            n "The deathbomb window in Touhou 6 starts at 6 frame, but it decreases every time you deathbomb. The timing does reset back to 6 frames upon death, though."
             jump deathbomb3
         label deathbomb2_2:
             n "Wrong! The deathbomb window in Touhou 6 starts at 6 frame, but it decreases every time you deathbomb. The timing does reset back to 6 frames upon death, though." with vpunch
             jump deathbomb3
         label deathbomb2_3:            
-            n "Wrong! All wrong!! Deathbombing has been a feature since Touhou 4, but it's not present in all later games. The fighting games don't even have bombs... Wouldn't be very sporting, after all." with vpunch
+        n "Wrong! All wrong!! Deathbombing has been a feature since Touhou 4, but it's not present in all later games. The fighting games don't even have bombs... Wouldn't be very sporting, after all." with vpunch
+        n "The deathbomb window in Touhou 6 starts at 6 frame, but it decreases every time you deathbomb. The timing does reset back to 6 frames upon death, though."
             jump deathbomb3
         label deathbomb2_4:
             $ correct = correct + 1
@@ -604,9 +615,17 @@ label start:
                 jump yamawaro_4
         label yamawaro_1:
             n "Wrong! They were introduced in chapter 13 of {i}Wild and Horned Hermit{/i}, in 2012." with vpunch
+            if not literacy:
+                show nareko happy
+                n "Of course, you'd have no way of knowing that since you can't read. I'm so sorry."
+                show nareko
             jump newchars
         label yamawaro_2:
             n "Wrong! They were introduced in chapter 13 of {i}Wild and Horned Hermit{/i}, in 2012." with vpunch
+            if not literacy:
+                show nareko happy
+                n "Of course, you'd have no way of knowing that since you can't read. I'm so sorry."
+                show nareko
             jump newchars
         label yamawaro_3:
             $ correct = correct + 1
@@ -618,7 +637,7 @@ label start:
             n "Wrong! The first named yamawaro character (Yamashiro Takane) was indeed introduced in 2021, but the yamawaro themselves were introduced in chapter 13 of {i}Wild and Horned Hermit{/i}, in 2012." with vpunch
             if not literacy:
                 show nareko happy
-                n "Of course, you'd have no way of knowing that since you can't read. I do apologize."
+                n "Of course, you'd have no way of knowing that since you can't read. I'm so sorry."
                 show nareko
             jump newchars
             
@@ -644,6 +663,7 @@ label start:
         label newchars_1:
             n "Wrong!!" with vpunch
             n "Rumia, Cirno, Meiling, Patchouli, Sakuya, Remilia, Flandre. That's 7."
+            n "Mountain of Faith is {i}obviously{/i} the correct answer, seeing as Aya debuted in Touhou 9."
             jump depiction
         label newchars_2:
             $ correct = correct + 1
@@ -657,11 +677,13 @@ label start:
             n "Eternity, Nemumo, Aunn, Narumi, Satono & Mai, Okina. That's 7."
             show nareko happy
             n "Did you forget about the dancers being a pair?"
+            n "Mountain of Faith is {i}obviously{/i} the correct answer, seeing as Aya debuted in Touhou 9."
             show nareko
             jump depiction
         label newchars_4:
             n "Wrong!!" with vpunch
             n "Mike, Takane, Sannyo, Misumaru, Megumu, Chimata, Momoyo. That's 7. Tsukasa obviously doesn't count since she isn't a stage boss."
+            n "Mountain of Faith is {i}obviously{/i} the correct answer, seeing as Aya debuted in Touhou 9."
             jump depiction
             
     label depiction:
@@ -685,6 +707,7 @@ label start:
             show nareko happy
             extend "\n... So you're wrong!"  with vpunch
             show nareko
+            n "The correct answer is the Hakurei god."
             jump taito1
             
         label depiction_2:
@@ -692,6 +715,7 @@ label start:
             show nareko happy
             extend " So you're wrong!"  with vpunch
             show nareko
+            n "The correct answer is the Hakurei god."
             jump taito1
             
         label depiction_3:
@@ -703,7 +727,10 @@ label start:
             
         label depiction_4:
             n "'Gungnir' is name of Remilia's spear."
+            show nareko happy
             extend " So you're wrong!"  with vpunch
+            show nareko
+            n "The correct answer is the Hakurei god."
             jump taito1
             
             
@@ -711,7 +738,7 @@ label start:
         $ total = total + 1
         window hide
         window show
-        "Between 1998 and 2007, ZUN worked as a programmer at a company widely known for its arcade games. {b}What company?{/b}"
+        "Between 1998 and 2007, ZUN worked as a programmer at a company widely known for its arcade games. {b}What company was it?{/b}"
         menu:
             extend ""
             "Konami":
@@ -747,7 +774,7 @@ label start:
         $ total = total + 1
         window hide
         window show
-        n "Interestingly, Taito is the developer behind another shooting game series featuring a shrine maiden and youkai. ZUN has publicly stated that this series directly inspired aspects of the Touhou Project. {b}Which game series?{/b}"
+        n "Interestingly, Taito is the developer behind another shooting game series featuring a shrine maiden and youkai. ZUN has publicly stated that this series directly inspired aspects of the Touhou Project. {b}Which game series is this?{/b}"
         menu:
             extend ""
             "Pocky & Rocky":
@@ -767,13 +794,16 @@ label start:
             jump alice
         label taito2_2:
             n "Wrong! Touhou 2 contains a reference to this game, but it's not a shooting game with shrine maidens, nor is it developed by Taito. It's a puzzle game by Konami." with vpunch
+            n "The correct answer is {i}Pocky & Rocky{/i}, known as  {i}Kiki Kaikai{/i} in Japan."
             jump alice
         label taito2_3:
             n "Wrong! While Touhou 1 clearly draws some inspiration from Megami Tensei, it's not a shooting game with shrine maidens, nor is it developed by Taito. It's a series of role-playing games by Atlus." with vpunch
+            n "The correct answer is {i}Pocky & Rocky{/i}, known as  {i}Kiki Kaikai{/i} in Japan."
             jump alice
         label taito2_4:
             n "Wrong! While ZUN has traced art from the Rance series, it's not a shooting game with shrine maidens, nor developed by Taito. It's a series of erotic RPG games by AliceSoft." with vpunch
-            n "Speaking of Alice..."
+            n "The correct answer is {i}Pocky & Rocky{/i}, known as  {i}Kiki Kaikai{/i} in Japan."
+            n "Speaking of AliceSoft..."
             jump alice
 
 
@@ -839,9 +869,11 @@ label start:
             jump nue
         label western_3:
             n "Wrong! It's all Japanese names in Touhou 17." with vpunch
+            n "{i}Eternity Larva{/i} from Touhou 16 is definitely not a Japanese name"
             jump nue
         label western_4:
             n "Wrong! It's all Japanese names in Touhou 18." with vpunch
+            n "{i}Eternity Larva{/i} from Touhou 16 is definitely not a Japanese name"
             jump nue
             
     label nue:
@@ -904,11 +936,13 @@ label start:
                 jump kirin_4
         label kirin_1:
             n "Wrong! Yebisu is part of the unlock code for 'Great Fairy Wars'"  with vpunch
+            n "The correct answer is Kirin, which is also known as \"ZUN's favorite beer\" – based on an interview from 2013. Of course, he might have a different favorite now, seeing as he's started his own beer brand and all."
             n "Unlock codes are codes that let you unlock everything (Extra stages, etc) in the official Touhou games. They are typically input by typing on your keyboard while having a specific item selected in one of the menus."
             n "Unlock codes exist for almost all official Windows games, but the existence of these codes only became known to the public in 2019. The details vary between the games and are very obscure."
             jump impossible
         label kirin_2:
             n "Wrong! Orion is part of the unlock code for 'Double Dealing Character'" with vpunch
+            n "The correct answer is Kirin, which is also known as \"ZUN's favorite beer\" – based on an interview from 2013. Of course, he might have a different favorite now, seeing as he's started his own beer brand and all."
             n "Unlock codes are codes that let you unlock everything (Extra stages, etc) in the official Touhou games. They are typically input by typing on your keyboard while having a specific item selected in one of the menus."
             n "Unlock codes exist for almost all official Windows games, but the existence of these codes only became known to the public in 2019. The details vary between the games and are very obscure."
             jump impossible
@@ -925,7 +959,8 @@ label start:
             jump impossible
         label kirin_4:
             #No current unlock codes meantion sapporo.
-            n "Wrong! The unlock code for Touhou 19 is 'kirinlager'."  with vpunch 
+            n "Wrong! The unlock code for Touhou 19 is 'kirinlager'."  with vpunch
+            n "Kirin is known as \"ZUN's favorite beer\" – based on an interview from 2013. Of course, he might have a different favorite now, seeing as he's started his own beer brand and all."
             n "Unlock codes are codes that let you unlock everything (Extra stages, etc) in the official Touhou games. They are typically input by typing on your keyboard while having a specific item selected in one of the menus."
             n "Unlock codes exist for almost all official Windows games, but the existence of these codes only became known to the public in 2019. The details vary between the games and are very obscure."
             jump impossible
@@ -944,10 +979,11 @@ label start:
                 jump impossible_2
             "Impossible Spell Card":
                 jump impossible_3
-            "Shoot the Bullet":
+            "Great Fairy Wars":
                 jump impossible_4
         label impossible_1:
-            n 'Wrong! The full title is "Touhou Hisoutensoku ~ Choudokyuu Ginyoru no Nazo o Oe". It is notable for being the only title in the series without an English component, but notably, it {i}does{/i} have the word "Touhou" in it.' with vpunch
+            n 'Wrong! The full title is "Touhou Hisoutensoku ~ Choudokyuu Ginyoru no Nazo o Oe". It is notable for being the first title in the series without an English component, but notably, it {i}does{/i} have the word "Touhou" in it.' with vpunch
+            n '"Danmaku Amanojaku ~ Impossible Spell Card" doesn\'t have "Touhou" anywhere in it, and is the correct answer.'
             jump penult
         label impossible_2:
             n 'Wrong! "Danmaku Amanojaku ~ Impossible Spell Card" released before "Hifuu Nightmare Diary ~ Violet Detector"!!' with vpunch
@@ -959,7 +995,8 @@ label start:
             show nareko
             jump penult
         label impossible_4:
-            n 'Wrong! The full title is "Touhou Bunkachou ~ Shoot the Bullet".' with vpunch
+            n 'Wrong! The full title is "Yousei Daisensou ~ Touhou Sangetsusei", so "Touhou" appears in the subtitle!' with vpunch
+            n '"Danmaku Amanojaku ~ Impossible Spell Card" is the correct answer.'
             jump penult
 
 
