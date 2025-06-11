@@ -500,9 +500,9 @@ label start:
         label deathbomb2_2:
             n "Wrong! The deathbomb window in Touhou 6 starts at 6 frame, but it decreases every time you deathbomb. The timing does reset back to 6 frames upon death, though." with vpunch
             jump deathbomb3
-        label deathbomb2_3:            
-        n "Wrong! All wrong!! Deathbombing has been a feature since Touhou 4, but it's not present in all later games. The fighting games don't even have bombs... Wouldn't be very sporting, after all." with vpunch
-        n "The deathbomb window in Touhou 6 starts at 6 frame, but it decreases every time you deathbomb. The timing does reset back to 6 frames upon death, though."
+        label deathbomb2_3:
+            n "Wrong! All wrong!! Deathbombing has been a feature since Touhou 4, but it's not present in all later games. The fighting games don't even have bombs... Wouldn't be very sporting, after all." with vpunch
+            n "The deathbomb window in Touhou 6 starts at 6 frame, but it decreases every time you deathbomb. The timing does reset back to 6 frames upon death, though."
             jump deathbomb3
         label deathbomb2_4:
             $ correct = correct + 1
