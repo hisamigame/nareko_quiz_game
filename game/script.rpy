@@ -579,7 +579,7 @@ label start:
             $ correct = correct + 1
             $ literacy = True
             show nareko angry
-            'Yes, that is correct. How did this "question" even get here?'
+            n 'Yes, that is correct. How did this "question" even get here?'
             show nareko
             jump yamawaro
         label fuujinroku_3:
@@ -738,7 +738,7 @@ label start:
         $ total = total + 1
         window hide
         window show
-        "Between 1998 and 2007, ZUN worked as a programmer at a company widely known for its arcade games. {b}What company was it?{/b}"
+        n "Between 1998 and 2007, ZUN worked as a programmer at a company widely known for its arcade games. {b}What company was it?{/b}"
         menu:
             extend ""
             "Konami":
@@ -877,16 +877,15 @@ label start:
             jump nue
             
     label nue:
-        n "Have you played the latest Touhou game yet?"
+        n "Have you played the Touhou 20 demo yet?"
         show nareko happy
-        n "It's my game, so you better play it! There is a demo on Steam."
+        n "It's my game, so you better play it! The demo is on Steam."
         show nareko
         extend "\nThe next question will surely give you trouble if you haven't..."
         $ total = total + 1
         window hide
         window show
-        n "One of the new characters in the Touhou 20 demo shares her family name with a character from the older games."
-        n "{b}Which older character has the same family name as a Touhou 20 character?{/b}"
+        n "One of the characters in the Touhou 20 demo shares her family name with a character from the older games. {b}Which older character?{/b}"
         menu:
             extend ""
             "Nue":
